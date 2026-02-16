@@ -11,7 +11,6 @@ class MovieRecommender:
             "score": []
         }
         self.dataset = pd.read_csv("data/movies.csv")
-        print("Dataset loaded successfully")
     
     def normalize(self):
         """ Tor normalize films vectors """
@@ -61,10 +60,10 @@ class MovieRecommender:
             self.recommandations.drop(0, inplace=True)
             self.recommandations = self.recommandations.head(n)
         
-    def display(self):
+    def display(self, title):
         results = ""
-        
+        print(f"\nRecommendations for {title}")
         for i, (titre, score) in enumerate(zip(self.recommandations['titre'], self.recommandations['score'])):
             results += f"{i}. {titre} {score}\n"
-            print(f"{i}. {titre} {score}")
+            print(f"{i+1}. {titre} {score}")
         return results

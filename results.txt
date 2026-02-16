@@ -1,4 +1,5 @@
-0. Arrival 1.53
-1. Snowpiercer 1.47
-2. Edge of Tomorrow 1.46
-3. Guardians of the Galaxy 1.46
+0. Gladiator 0.1
+1. Saving Private Ryan 0.17
+2. 1917 0.17
+3. The Lord of the Rings: The Fellowship of the Ring 0.2
+4. Oldboy 0.2

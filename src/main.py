@@ -14,7 +14,7 @@ def main():
     Firede = MovieRecommender()
     Firede.normalize()
     Firede.recommend(cliargs[0], cliargs[1], cliargs[2])
-    results = Firede.display()
+    results = Firede.display(cliargs[0])
 
     with open("results.txt", "w") as file:
         file.write(results)
