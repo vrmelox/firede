@@ -21,7 +21,7 @@ class MovieRecommender:
         self.dataset.scifi = self.dataset.scifi.apply(normalize_minmax)
         self.dataset.drama = self.dataset.drama.apply(normalize_minmax)
         
-    def film_vectors(row):
+    def film_vectors(self, row):
         return row.iloc[[1, 2, 3, 4, 5]].to_numpy()
 
     def recommend(self, movie_title, n=5, method='cosine'):
@@ -45,22 +45,24 @@ class MovieRecommender:
         ed = findfilm.iloc[:, [1, 2,3,4,5]].iloc[0].to_numpy()
         if method == 'cosine':
             scores = self.dataset.apply(lambda row: cosine_similarity(ed, self.film_vectors(row)), axis=1)
-            self.recommandations['title'] = self.dataset['title']
-            self.recommandations['score'] = scores
-            self.recommandations = pd.DataFrame(self.recommandations)
+            self.recommandations = pd.DataFrame({
+                "titre": self.dataset["title"],
+                "score": scores
+            })
             self.recommandations = self.recommandations.sort_values(by='score', ascending=False)
             self.recommandations = self.recommandations.head(n)
         if method == 'euclidian':
             scores = self.dataset.apply(lambda row: euclidian_distance(ed, self.film_vectors(row)), axis=1)
-            self.recommandations['title'] = self.dataset['title']
-            self.recommandations['score'] = scores
-            self.recommandations = pd.DataFrame(self.recommandations)
+            self.recommandations = pd.DataFrame({
+                "titre": self.dataset["title"],
+                "score": scores
+            })
             self.recommandations = self.recommandations.sort_values(by='score')
             # self.recommandations.pop(0)
             self.recommandations = self.recommandations.head(n)
         
     def display(self):
         results = ""
-        for i, x in enumerate(self.recommandations):
-            results += f"{i}. {x.title} {x.score}"
+        for i, (titre, score) in enumerate(zip(self.recommandations['titre'], self.recommandations['score'])):
+            results += f"{i}. {titre} {score}\n"
         return results
