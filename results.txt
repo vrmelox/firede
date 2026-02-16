@@ -1,5 +1,5 @@
 0. Gladiator 0.1
-1. Saving Private Ryan 0.17
-2. 1917 0.17
+1. Saving Private Ryan 0.1732
+2. 1917 0.1732
 3. The Lord of the Rings: The Fellowship of the Ring 0.2
 4. Oldboy 0.2

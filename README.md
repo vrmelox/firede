@@ -38,12 +38,18 @@ Enter the number of recommendations: 5
 Choose a method (cosine/euclidian): cosine
 
 Recommendations for The Dark Knight
-1. Arrival 1.53
-2. Snowpiercer 1.47
-3. Edge of Tomorrow 1.46
-4. Guardians of the Galaxy 1.46
-5. Children of Men 1.45
+1. The Dark Knight 1.0
+2. Gladiator 0.9971
+3. 1917 0.9932
+4. Saving Private Ryan 0.9922
+5. Dunkirk 0.9913
 ```
+
+The scores are very close to 1.0 (0.99+), which indicates that these movies 
+have **almost identical genre proportions** to The Dark Knight.
+
+All are action/war films with little comedy and romance, 
+and a lot of drama.
 
 ### Euclidian
 Please enter a movie's name: The Dark Knight
@@ -53,15 +59,24 @@ Choose a method (cosine/euclidian): euclidian
 ```
 Recommendations for The Dark Knight
 1. Gladiator 0.1
-2. Saving Private Ryan 0.17
-3. 1917 0.17
+2. Saving Private Ryan 0.1732
+3. 1917 0.1732
 4. The Lord of the Rings: The Fellowship of the Ring 0.2
 5. Oldboy 0.2
+
 ```
 
-As you can see, euclidian seems to prefer films with the same genre are similar to the one the user like. I see that it works on number. 
+The distances are very small (0.1 to 0.2), which confirms that these 
+movies are **numerically very close** in the normalized vector space.
 
-The cosine, that seems realistic, do not choose films based on their genre. Because Guardians of the Galaxy takes place in other universe and are mostly futurist. So it made the recommentation based on caracteristic, content of the film.
+After normalization, both methods converge towards similar recommendations 
+because movies that are close in distance also have similar angles.
+
+**Cosine similarity** is preferable when you want to ignore absolute intensity 
+(e.g., an "intense" vs "moderate" action movie but with the same proportions).
+
+**Euclidean distance** is preferable when absolute values 
+matter (e.g., movies with exactly the same IMDB rating).
 
 ## Limits and amelioration
 This film recommendation system is too simple. It might need some ML to make sure the recommendation are trully deep.

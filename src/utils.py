@@ -27,7 +27,7 @@ def dot_product(vec1, vec2):
         raise ValueError("Les vecteurs doivent avoir la même dimension")
     if any(math.isnan(x) for x in vec1 + vec2):
         return float('nan')
-    return round(math.sqrt(sum([(a * b) for a, b in zip(vec1, vec2)])), 2)
+    return sum([(a * b) for a, b in zip(vec1, vec2)])
 
 def vector_norm(vec):
     """
@@ -58,7 +58,7 @@ def euclidian_distance(vec1, vec2):
         raise ValueError("Les vecteurs doivent avoir la même dimension")
     if any(math.isnan(x) for x in vec1 + vec2):
         return float('nan')
-    return round(math.sqrt(sum([(b - a)**2 for a, b in zip(vec1, vec2)])), 2)
+    return round(math.sqrt(sum([(b - a)**2 for a, b in zip(vec1, vec2)])), 4)
 
 def cliManager():
     cliargs = []
@@ -78,3 +78,4 @@ def cliManager():
         raise TypeError("Choose a real method between cosine and euclidian")
     cliargs.append(method)
     return cliargs
+

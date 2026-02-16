@@ -13,4 +13,4 @@ def cosine_similarity(vec1, vec2):
     docti = dot_product(vec1, vec2)
     norm_vec1 = vector_norm(vec1)
     norm_vec2 = vector_norm(vec2)
-    return round(docti / norm_vec1 * norm_vec2, 2)
+    return round(docti / (norm_vec1 * norm_vec2), 4)
