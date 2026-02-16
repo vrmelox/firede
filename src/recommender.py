@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
-from .utils import cosine_similarity, euclidian_distance, normalize_minmax
+from .utils import euclidian_distance, normalize_minmax
+from .similarity import cosine_similarity
 
 class MovieRecommender:
     """ Structure de recommendation d'un film"""
@@ -9,7 +10,7 @@ class MovieRecommender:
             "titre": [],
             "score": []
         }
-        self.dataset = pd.read_csv("../data.csv")
+        self.dataset = pd.read_csv("data/movies.csv")
         print("Dataset loaded successfully")
     
     def normalize(self):

@@ -1,4 +1,4 @@
-from .utils import MovieRecommender, recommender
+from .recommender import MovieRecommender
 
 def main():
     Firede = MovieRecommender()
@@ -8,3 +8,6 @@ def main():
 
     with open("results.txt", "a") as file:
         file.write(results)
+
+if __name__ == "__main__":
+    main()
