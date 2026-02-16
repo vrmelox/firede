@@ -57,8 +57,8 @@ class MovieRecommender:
                 "titre": self.dataset["title"],
                 "score": scores
             })
-            self.recommandations = self.recommandations.sort_values(by='score')
-            # self.recommandations.pop(0)
+            self.recommandations = self.recommandations.sort_values(by='score').reset_index(drop=True)
+            self.recommandations.drop(0, inplace=True)
             self.recommandations = self.recommandations.head(n)
         
     def display(self):
