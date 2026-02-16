@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from .utils import cosine_similarity, euclidian_distance
+from .utils import cosine_similarity, euclidian_distance, normalize_minmax
 
 class MovieRecommender:
     """ Structure de recommendation d'un film"""
@@ -11,6 +11,14 @@ class MovieRecommender:
         }
         self.dataset = pd.read_csv("../data.csv")
         print("Dataset loaded successfully")
+    
+    def normalize(self):
+        """ Tor normalize films vectors """
+        self.dataset.action = self.dataset.action.apply(normalize_minmax)
+        self.dataset.comedy = self.dataset.comedy.apply(normalize_minmax)
+        self.dataset.romance = self.dataset.romance.apply(normalize_minmax)
+        self.dataset.scifi = self.dataset.scifi.apply(normalize_minmax)
+        self.dataset.drama = self.dataset.drama.apply(normalize_minmax)
         
     def film_vectors(row):
         return row.iloc[[1, 2, 3, 4, 5]].to_numpy()
@@ -38,13 +46,20 @@ class MovieRecommender:
             scores = self.dataset.apply(lambda row: cosine_similarity(ed, self.film_vectors(row)), axis=1)
             self.recommandations['title'] = self.dataset['title']
             self.recommandations['score'] = scores
-            reco_df = pd.DataFrame(self.recommandations)
-            reco_df = reco_df.sort_values(by='score', ascending=False)
-            return reco_df.head(n)
+            self.recommandations = pd.DataFrame(self.recommandations)
+            self.recommandations = self.recommandations.sort_values(by='score', ascending=False)
+            self.recommandations = self.recommandations.head(n)
         if method == 'euclidian':
             scores = self.dataset.apply(lambda row: euclidian_distance(ed, self.film_vectors(row)), axis=1)
             self.recommandations['title'] = self.dataset['title']
             self.recommandations['score'] = scores
-            reco_df = pd.DataFrame(self.recommandations)
-            reco_df = reco_df.sort_values(by='score')
-            return reco_df.head(n)
+            self.recommandations = pd.DataFrame(self.recommandations)
+            self.recommandations = self.recommandations.sort_values(by='score')
+            # self.recommandations.pop(0)
+            self.recommandations = self.recommandations.head(n)
+        
+    def display(self):
+        results = ""
+        for i, x in enumerate(self.recommandations):
+            results += f"{i}. {x.title} {x.score}"
+        return results

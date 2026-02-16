@@ -12,12 +12,6 @@ def normalize_minmax(values):
     """
     return (values - 0) / (10 - 0)
 
-        # df.action = df.action.apply(normalize_minmax)
-        # df.comedy = df.comedy.apply(normalize_minmax)
-        # df.romance = df.romance.apply(normalize_minmax)
-        # df.scifi = df.scifi.apply(normalize_minmax)
-        # df.drama = df.drama.apply(normalize_minmax)
-
 def dot_product(vec1, vec2):
     """
     Calcule le produit scalaire entre deux vecteurs
