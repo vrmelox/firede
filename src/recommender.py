@@ -63,6 +63,8 @@ class MovieRecommender:
         
     def display(self):
         results = ""
+        
         for i, (titre, score) in enumerate(zip(self.recommandations['titre'], self.recommandations['score'])):
             results += f"{i}. {titre} {score}\n"
+            print(f"{i}. {titre} {score}")
         return results

@@ -59,3 +59,22 @@ def euclidian_distance(vec1, vec2):
     if any(math.isnan(x) for x in vec1 + vec2):
         return float('nan')
     return round(math.sqrt(sum([(b - a)**2 for a, b in zip(vec1, vec2)])), 2)
+
+def cliManager():
+    cliargs = []
+    print("=== Film recommendation system ===\nYou can stop anytime with Crtl + C")
+    movie_title = input("Please enter a movie's name: ")
+    if len(movie_title) <= 0 or not isinstance(movie_title, str):
+        raise TypeError("Provide a real name")
+    cliargs.append(movie_title)
+    n = int(input("Enter the number of recommendations: "))
+    if not isinstance(n, int):
+        raise TypeError("Provide a number")
+    cliargs.append(n)
+    method = input("Choose a method (cosine/euclidian): ")
+    if len(method) <= 0 or not isinstance(movie_title, str):
+        raise TypeError("Choose a method")
+    if method not in ["cosine", "euclidian"]:
+        raise TypeError("Choose a real method between cosine and euclidian")
+    cliargs.append(method)
+    return cliargs
